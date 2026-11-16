@@ -4,7 +4,6 @@ class Vec:
     def __init__(self, x, y):
         self.x = x
         self.y = y
-    
     def __repr__(self):
         return "(", self.x, ",", self.y, ")"
     def __rmul__(self, factor):
@@ -33,8 +32,8 @@ class Particle:
     def apply_force(self, dt, f):
         self.velocity += dt * f/self.mass
     def bounding_box(self):
-        vec_bot_right = Vec(self.position[0] + self.radius, self.position[1] - self.radius)
-        vec_top_left = Vec(self.position[0] - self.radius, self.position[1] + self.radius)
+        vec_bot_right = Vec(self.position.get_coords()[0] + self.radius, self.position.get_coords()[1] - self.radius)
+        vec_top_left = Vec(self.position.get_coords()[0] - self.radius, self.position.get_coords()[1] + self.radius)
         return (vec_bot_right, vec_top_left)
 
 ###########################################
