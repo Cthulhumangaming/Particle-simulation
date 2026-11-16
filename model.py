@@ -29,13 +29,26 @@ def dot(u,v):
     return u.x * v.x + u.y * v.y
 
 # Task (4/12): Create a class Particle
+class Particle:
+    def __init__(self, mass, position, velocity, radius):
+        self.mass = mass
+        self.position = position
+        self.velocity = velocity
+        self.radius = radius
+    def inertiaL_move(self, dt):
+        self.position += dt * self.velocity
+    def apply_force(self, dt, f):
+        self.velocity += dt * f/self.mass
+    
+    
+    
 
 # Task (5/12): In the Particle class, implement a method inertial_move(self, dt).
 
 # Task (6/12): In the Particle class, implement a method apply_force(self, dt, f)
 
 ##########################################
-### NB. Tasks 7–8 are done in view.py. ###
+### NB. Tasks 7-8 are done in view.py. ###
 ##########################################
 
 
