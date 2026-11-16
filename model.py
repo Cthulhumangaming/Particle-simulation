@@ -43,19 +43,6 @@ class Particle:
         vec_top_left = Vec(self.position[0] - self.radius, self.position[1] + self.radius)
         return (vec_bot_right, vec_top_left)
 
-
-##########################################
-### NB. Tasks 7-8 are done in view.py. ###
-##########################################
-
-
-# Task (9/12): In the Particle class, add a method bounding_box(self)
-
-
-
-
-
-
 ###########################################
 ### When you're done with all 12 tasks: ###
 ### forces/other features in this file! ###
