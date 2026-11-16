@@ -22,9 +22,8 @@ class Vec:
         return out
 
     def get_coords(self):
-        return (self.x,self.y)
+        return (self.x, self.y)
         
-
 def dot(u,v):
     return u.x * v.x + u.y * v.y
 
@@ -39,13 +38,11 @@ class Particle:
         self.position += dt * self.velocity
     def apply_force(self, dt, f):
         self.velocity += dt * f/self.mass
-    
-    
-    
+    def bounding_box(self):
+        vec_bot_right = Vec(self.position[0] + self.radius, self.position[1] - self.radius)
+        vec_top_left = Vec(self.position[0] - self.radius, self.position[1] + self.radius)
+        return (vec_bot_right, vec_top_left)
 
-# Task (5/12): In the Particle class, implement a method inertial_move(self, dt).
-
-# Task (6/12): In the Particle class, implement a method apply_force(self, dt, f)
 
 ##########################################
 ### NB. Tasks 7-8 are done in view.py. ###
