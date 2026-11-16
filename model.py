@@ -1,6 +1,6 @@
 import math
 
-class Vector:
+class Vec:
     def __init__(self, x, y):
         self.x = x
         self.y = y
@@ -9,13 +9,13 @@ class Vector:
         return "(", self.x, ",", self.y, ")"
     
     def __rmul__(self, factor):
-        return Vector(self.x * factor, self.y * factor)
+        return Vec(self.x * factor, self.y * factor)
 
     def __add__(self, other):
-        return Vector(self.x + other.x, self.y + other.y)
+        return Vec(self.x + other.x, self.y + other.y)
 
     def __sub(self, other):
-        return Vector(self.x - other.x, self.y - other.y)
+        return Vec(self.x - other.x, self.y - other.y)
 
     def norm(self):
         out = math.sqrt(self.x**2 + self.y**2)
