@@ -37,6 +37,12 @@ class Particle:
         return (vec_bot_right, vec_top_left)
 
 ###########################################
-### When you're done with all 12 tasks: ###
-### forces/other features in this file! ###
+################# Forces ##################
 ###########################################
+
+def gravity(dt, particles, G = 6.6743e-11):
+    for p1 in particles:
+        f_g = 0
+        for p2 in particles:
+            f_g += G * (p1.mass * p2.mass)/(p2.position - p1.position).norm()
+        p1.apply_force(dt, f_g)
