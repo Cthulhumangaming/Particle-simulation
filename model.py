@@ -30,7 +30,7 @@ class Particle:
     def inertial_move(self, dt):
         self.position += dt * self.velocity
     def apply_force(self, dt, f):
-        self.velocity += dt * f * 1/self.mass
+        self.velocity += dt * (1/self.mass) *f 
     def bounding_box(self):
         vec_bot_right = Vec(self.position.get_coords()[0] + self.radius, self.position.get_coords()[1] - self.radius)
         vec_top_left = Vec(self.position.get_coords()[0] - self.radius, self.position.get_coords()[1] + self.radius)
