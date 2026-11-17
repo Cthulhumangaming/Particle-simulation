@@ -7,7 +7,7 @@ def to_canvas_coords(canvas, u):
     h = canvas.winfo_reqheight()
     w = canvas.winfo_reqwidth()
     tu = u.get_coords()
-    return h/20 * Vec(tu[0]+w/2, -tu[1]+h/2)
+    return Vec(h/20*tu[0]+w/2, -h/20*tu[1]+h/2)
  
 root = Tk()
 canvas = Canvas(root, bg="white", width=800, height=600)
