@@ -12,7 +12,7 @@ def to_canvas_coords(canvas, u):
 root = Tk()
 canvas = Canvas(root, bg="white", width=800, height=600)
 canvas.pack()
-o = canvas.create_oval(80, 30, 140, 150, fill="blue")
+#o = canvas.create_oval(80, 30, 140, 150, fill="blue")
 
 def move_oval_to(o, u1, u2):
     u1_cords = to_canvas_coords(canvas, u1)
@@ -25,7 +25,6 @@ def create_oval(canvas, particle):
     move_oval_to(o, particle.bounding_box()[0], particle.bounding_box()[1])
     return o
 
-
 # Task (12/12): Define a function simulation_loop(f, timestep, particles)
 def simulation_loop(f, timestep, particles):
     ovals = {}
@@ -35,6 +34,6 @@ def simulation_loop(f, timestep, particles):
         f(timestep, particles)
         for p in particles:
             p.inertial_move(timestep)
-            move_oval_to(ovals[p], p.bounding_box[0], p.bounding_box[1])
+            move_oval_to(ovals[p], p.bounding_box()[0], p.bounding_box()[1])
 
         canvas.update()
