@@ -28,7 +28,6 @@ def create_oval(canvas, particle):
 # Task (12/12): Define a function simulation_loop(f, timestep, particles)
 def simulation_loop(f, timestep, particles):
     ovals = {}
-    frames = 0
     for p in particles:
         ovals[p] = create_oval(canvas, p)
     tm1 = time.time()
@@ -39,9 +38,6 @@ def simulation_loop(f, timestep, particles):
             move_oval_to(ovals[p], p.bounding_box()[0], p.bounding_box()[1])
 
         t = time.time()
-        print(t - tm1)
         if t - tm1 > 1/30:
             tm1 = t
-            frames += 1
-            print(frames)
             canvas.update()
