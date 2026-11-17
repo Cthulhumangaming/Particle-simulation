@@ -5,12 +5,12 @@ class Vec:
         self.x = x
         self.y = y
     def __repr__(self):
-        return "(", self.x, ",", self.y, ")"
+        return f"({self.x},{self.y})"
     def __rmul__(self, factor):
         return Vec(self.x * factor, self.y * factor)
     def __add__(self, other):
         return Vec(self.x + other.x, self.y + other.y)
-    def __sub(self, other):
+    def __sub__(self, other):
         return Vec(self.x - other.x, self.y - other.y)
     def norm(self):
         out = math.sqrt(self.x**2 + self.y**2)
@@ -27,10 +27,10 @@ class Particle:
         self.position = position
         self.velocity = velocity
         self.radius = radius
-    def inertiaL_move(self, dt):
+    def inertial_move(self, dt):
         self.position += dt * self.velocity
     def apply_force(self, dt, f):
-        self.velocity += dt * f/self.mass
+        self.velocity += dt * f * 1/self.mass
     def bounding_box(self):
         vec_bot_right = Vec(self.position.get_coords()[0] + self.radius, self.position.get_coords()[1] - self.radius)
         vec_top_left = Vec(self.position.get_coords()[0] - self.radius, self.position.get_coords()[1] + self.radius)

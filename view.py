@@ -1,6 +1,7 @@
 from tkinter import *
 from model import *
 from model import *
+import time
 
 def to_canvas_coords(canvas, u):
     h = canvas.winfo_reqheight()
@@ -23,5 +24,6 @@ def create_oval(canvas, particle):
     o = canvas.create_oval(0, 0, 0, 0, fill="blue")
     move_oval_to(o, particle.bounding_box()[0], particle.bounding_box()[1])
     return o
+
 
 # Task (12/12): Define a function simulation_loop(f, timestep, particles)
