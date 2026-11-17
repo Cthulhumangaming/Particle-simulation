@@ -39,10 +39,9 @@ def simulation_loop(f, timestep, particles):
             move_oval_to(ovals[p], p.bounding_box()[0], p.bounding_box()[1])
 
         t = time.time()
-        if t - tm1 < 1/30:
-            next
-        tm1 = t
-
-        frames += 1
-        print(frames)
-        canvas.update()
+        print(t - tm1)
+        if t - tm1 > 1/30:
+            tm1 = t
+            frames += 1
+            print(frames)
+            canvas.update()
