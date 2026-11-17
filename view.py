@@ -30,10 +30,17 @@ def simulation_loop(f, timestep, particles):
     ovals = {}
     for p in particles:
         ovals[p] = create_oval(canvas, p)
+    tm1 = time.time()
     while True:
         f(timestep, particles)
         for p in particles:
             p.inertial_move(timestep)
             move_oval_to(ovals[p], p.bounding_box()[0], p.bounding_box()[1])
 
+        t = time.time()
+        if t - tm1 < 1/30:
+            pass
+        else:
+            tm1 = t
+   
         canvas.update()
