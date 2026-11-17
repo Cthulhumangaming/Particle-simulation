@@ -27,3 +27,14 @@ def create_oval(canvas, particle):
 
 
 # Task (12/12): Define a function simulation_loop(f, timestep, particles)
+def simulation_loop(f, timestep, particles):
+    ovals = {}
+    for p in particles:
+        ovals[p] = create_oval(canvas, p)
+    while True:
+        f(timestep, particles)
+        for p in particles:
+            p.inertial_move(timestep)
+            move_oval_to(ovals[p], p.bounding_box[0], p.bounding_box[1])
+
+        canvas.update()
