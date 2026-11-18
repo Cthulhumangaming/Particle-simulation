@@ -17,6 +17,8 @@ class Vec:
         return out
     def get_coords(self):
         return (self.x, self.y)
+    def get_length(self):
+        return math.sqrt(self.x**2 + self.y**2)
         
 def dot(u,v):
     return u.x * v.x + u.y * v.y
@@ -46,3 +48,12 @@ def gravity(dt, particles, G = 6.6743e-11):
         for p2 in particles:
             f_g += G * (p1.mass * p2.mass)/(p2.position - p1.position).norm()
         p1.apply_force(dt, f_g)
+
+def collision(dt, particles, k = 1.0):
+    for p1 in particles:
+        f = 0
+        for p2 in particles:
+            r = (p2.position - p1.position).get_length()
+            if r < p2.radius + p1.radius:
+                f += k*(p2.radius + p1.radius - r)
+        p1.apply_force(dt, f)
