@@ -52,13 +52,12 @@ def gravity(dt, particles, G = 1):
                 f_g_vec += f_g / (p2.position - p1.position).norm() * (p2.position - p1.position) 
         p1.apply_force(dt, f_g_vec)
 
-def collision(dt, particles, k = 1.0):
-    i = 0
+def collision(dt, particles, k = 100000.0):
     for p1 in particles:
         f = Vec(0, 0)
         for p2 in particles:
             if not p2 is p1: 
                 r = (p2.position - p1.position).get_length()
                 if r < p2.radius + p1.radius:
-                    f += k*(p2.radius + p1.radius - r)*(1/r)*(p2.position - p1.position)
+                    f += k*(p2.radius + p1.radius - r)*(1/r)*(p1.position - p2.position)
         p1.apply_force(dt, f)
