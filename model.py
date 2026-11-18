@@ -42,12 +42,15 @@ class Particle:
 ################# Forces ##################
 ###########################################
 
-def gravity(dt, particles, G = 6.6743e-11):
+def gravity(dt, particles, G = 1):
     for p1 in particles:
         f_g = 0
+        f_g_vec = Vec(0,0)
         for p2 in particles:
-            f_g += G * (p1.mass * p2.mass)/(p2.position - p1.position).norm()
-        p1.apply_force(dt, f_g)
+            if not p1 is p2:
+                f_g += G * (p1.mass * p2.mass)/((p2.position - p1.position).norm()**2)
+                f_g_vec += f_g / (p2.position - p1.position).norm() * (p2.position - p1.position) 
+        p1.apply_force(dt, f_g_vec)
 
 def collision(dt, particles, k = 1.0):
     for p1 in particles:
