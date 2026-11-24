@@ -58,7 +58,7 @@ def collision(dt, particles, k = 100000.0):
         f = Vec(0, 0)
         for p2 in particles:
             if not p2 is p1: 
-                r = (p2.position - p1.position).get_length()
+                r = (p2.position - p1.position).norm()
                 if r < p2.radius + p1.radius:
                     f += k*(p2.radius + p1.radius - r)*(1/r)*(p1.position - p2.position)
         p1.apply_force(dt, f)
