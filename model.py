@@ -17,8 +17,6 @@ class Vec:
         return out
     def get_coords(self):
         return (self.x, self.y)
-    def get_length(self):
-        return math.sqrt(self.x**2 + self.y**2)
         
 def dot(u,v):
     return u.x * v.x + u.y * v.y
@@ -29,6 +27,7 @@ class Particle:
         self.position = position
         self.velocity = velocity
         self.radius = radius
+        self.charge = 0
     def inertial_move(self, dt):
         self.position += dt * self.velocity
     def apply_force(self, dt, f):
@@ -37,27 +36,46 @@ class Particle:
         vec_bot_right = Vec(self.position.get_coords()[0] + self.radius, self.position.get_coords()[1] - self.radius)
         vec_top_left = Vec(self.position.get_coords()[0] - self.radius, self.position.get_coords()[1] + self.radius)
         return (vec_bot_right, vec_top_left)
+    def set_charge(self, new_charge):
+        self.charge = new_charge
 
-###########################################
-################# Forces ##################
-###########################################
+#————————————————————————————————————————#
+#---------------- Forces ----------------#
+#————————————————————————————————————————#
 
 def gravity(dt, particles, G = 1):
     for p1 in particles:
-        f_g = 0
-        f_g_vec = Vec(0,0)
+        f_g = Vec(0,0)
         for p2 in particles:
-            if not p1 is p2:
-                f_g += G * (p1.mass * p2.mass)/((p2.position - p1.position).norm()**2)
-                f_g_vec += f_g / (p2.position - p1.position).norm() * (p2.position - p1.position) 
-        p1.apply_force(dt, f_g_vec)
+            if not p2 is p1:
+                f_g += radius_force(p1, p2, p1.mass, p2.mass, G) 
+        p1.apply_force(dt, f_g)
 
 def collision(dt, particles, k = 100000.0):
     for p1 in particles:
         f = Vec(0, 0)
         for p2 in particles:
             if not p2 is p1: 
-                r = (p2.position - p1.position).get_length()
+                r = (p2.position - p1.position).norm()
                 if r < p2.radius + p1.radius:
-                    f += k*(p2.radius + p1.radius - r)*(1/r)*(p1.position - p2.position)
+                    f += k * (p2.radius + p1.radius - r)*(1/r)*(p1.position - p2.position)
+                    # Neutralizing charges
+                    p1_c = p1.charge
+                    p2_c = p2.charge
+                    new_charge = (p1_c+p2_c)/2
+                    p1.set_charge(new_charge)
+                    p2.set_charge(new_charge)
         p1.apply_force(dt, f)
+
+def coulomb_force(dt, particles, k = 1):
+    for p1 in particles:
+        f_e = Vec(0,0)
+        for p2 in particles:
+            if not p2 is p1:
+                f_e += radius_force(p1, p2, p1.charge, p2.charge, k) 
+        p1.apply_force(dt, f_e)
+
+def radius_force(p1, p2, p1_attribute, p2_attribute, const):
+    f = const * (p1_attribute * p2_attribute)/((p2.position - p1.position).norm()**2)
+    f_vec = f / (p2.position - p1.position).norm() * (p2.position - p1.position) 
+    return f_vec
