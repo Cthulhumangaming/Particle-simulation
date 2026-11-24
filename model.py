@@ -73,7 +73,7 @@ def coulomb_force(dt, particles, k = 1000):
         for p2 in particles:
             if not p2 is p1:
                 f_e += radius_force(p1, p2, p1.charge, p2.charge, k) 
-        p1.apply_force(dt, f_e)
+        p1.apply_force(dt, -1*f_e)
 
 def radius_force(p1, p2, p1_attribute, p2_attribute, const):
     f = const * (p1_attribute * p2_attribute)/((p2.position - p1.position).norm()**2)
