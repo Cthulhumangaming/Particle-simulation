@@ -3,15 +3,15 @@ from model import *
 import random
 import math
 
-n = 4
+n = 20
 particles = []
 for i in range(n):
     theta = i*2*math.pi/n
     u = Vec(math.cos(theta),math.sin(theta))
-    pos = 5 * random.random() * u 
+    pos = 10 * random.random() * u 
     vel = 0 * u 
-    p = Particle(1,pos,vel,0.5)
-    p.charge = random.randint(-1, 1)
+    p = Particle(1,pos,vel,0.3)
+    p.charge = random.randint(-10, 10) / 10
     particles.append(p)
 
 def forces(dt,particles):

@@ -58,11 +58,3 @@ def simulation_loop(f, timestep, particles, color_of):
         if t - tm1 > 1/30:
             tm1 = t
             canvas.update()
-
-test = Particle(1, Vec(0, 0), Vec(0, 0), 1)
-test.charge = 0
-print(color_from_charge(test))
-test.charge = 1
-print(color_from_charge(test))
-test.charge = -1
-print(color_from_charge(test))

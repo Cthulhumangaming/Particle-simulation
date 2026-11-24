@@ -51,7 +51,7 @@ def gravity(dt, particles, G = 1):
                 f_g += radius_force(p1, p2, p1.mass, p2.mass, G) 
         p1.apply_force(dt, f_g)
 
-def collision(dt, particles, k = 100000.0):
+def collision(dt, particles, k = 1000000.0):
     for p1 in particles:
         f = Vec(0, 0)
         for p2 in particles:
@@ -67,7 +67,7 @@ def collision(dt, particles, k = 100000.0):
                     p2.set_charge(new_charge)
         p1.apply_force(dt, f)
 
-def coulomb_force(dt, particles, k = 1000):
+def coulomb_force(dt, particles, k = 100000):
     for p1 in particles:
         f_e = Vec(0,0)
         for p2 in particles:
