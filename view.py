@@ -3,6 +3,9 @@ from model import *
 from model import *
 import time
 
+def lerp(x, a, b):
+    return (x+b)/(b-a)
+
 def to_canvas_coords(canvas, u):
     h = canvas.winfo_reqheight()
     w = canvas.winfo_reqwidth()
@@ -11,15 +14,14 @@ def to_canvas_coords(canvas, u):
 
 def color_from_charge(p):
     def to_hex(c):
-        h = hex(c)[:2]
+        h = hex(c)[2:]
         if len(h) == 1:
             h = '0'+h
         return h
+    r = int(lerp(p.charge, -1, 1) * 255)
+    b = int((1-lerp(p.charge, -1, 1)) * 255)
 
-    r = int(min(p.charge, 1) * 255)
-    b = int(max(0 - p.charge, -1) * 255)
-
-    return f'#{to_hex(r)}0{to_hex(b)}'
+    return f'#{to_hex(r)}00{to_hex(b)}'
  
 root = Tk()
 canvas = Canvas(root, bg="white", width=800, height=600)
@@ -56,3 +58,11 @@ def simulation_loop(f, timestep, particles, color_of):
         if t - tm1 > 1/30:
             tm1 = t
             canvas.update()
+
+test = Particle(1, Vec(0, 0), Vec(0, 0), 1)
+test.charge = 0
+print(color_from_charge(test))
+test.charge = 1
+print(color_from_charge(test))
+test.charge = -1
+print(color_from_charge(test))

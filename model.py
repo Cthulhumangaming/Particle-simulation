@@ -67,7 +67,7 @@ def collision(dt, particles, k = 100000.0):
                     p2.set_charge(new_charge)
         p1.apply_force(dt, f)
 
-def coulomb_force(dt, particles, k = 1):
+def coulomb_force(dt, particles, k = 1000):
     for p1 in particles:
         f_e = Vec(0,0)
         for p2 in particles:

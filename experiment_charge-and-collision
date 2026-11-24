@@ -9,7 +9,7 @@ for i in range(n):
     theta = i*2*math.pi/n
     u = Vec(math.cos(theta),math.sin(theta))
     pos = 5 * u
-    vel = -10 * u 
+    vel = 0 * u 
     p = Particle(1,pos,vel,1)
     p.charge = 2*random()-1
     particles.append(p)
@@ -19,4 +19,4 @@ def forces(dt,particles):
     collision(dt, particles)
     coulomb_force(dt, particles)
 
-simulation_loop(collision, 0.00005, particles, color_from_charge)
+simulation_loop(forces, 0.00005, particles, color_from_charge)
