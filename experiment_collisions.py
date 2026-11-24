@@ -14,4 +14,4 @@ particles.pop()
 def no_force(dt,particles):
     pass
 
-simulation_loop(collision, 0.000005, particles)
+simulation_loop(collision, 0.00005, particles, None)
