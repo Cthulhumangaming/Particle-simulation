@@ -17,8 +17,6 @@ class Vec:
         return out
     def get_coords(self):
         return (self.x, self.y)
-    def get_length(self):
-        return math.sqrt(self.x**2 + self.y**2)
         
 def dot(u,v):
     return u.x * v.x + u.y * v.y
