@@ -15,4 +15,4 @@ for i in range(3):
     particles.append(particle)
 
 
-simulation_loop(gravity, 0.00005, particles)
+simulation_loop(gravity, 0.00005, particles, None)
