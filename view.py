@@ -16,8 +16,8 @@ def color_from_charge(p):
             h = '0'+h
         return h
 
-    r = min(p.charge, 1) * 256
-    b = max(1 - p.charge, 0) * 256
+    r = int(min(p.charge, 1) * 255)
+    b = int(max(0 - p.charge, -1) * 255)
 
     return f'#{to_hex(r)}0{to_hex(b)}'
  
@@ -49,7 +49,7 @@ def simulation_loop(f, timestep, particles, color_of):
         f(timestep, particles)
         for p in particles:
             p.inertial_move(timestep)
-            ovals[p].fill = color_of(p)
+            canvas.itemconfig(ovals[p], fill=color_of(p))
             move_oval_to(ovals[p], p.bounding_box()[0], p.bounding_box()[1])
 
         t = time.time()

@@ -1,4 +1,6 @@
 from view import *
+from model import *
+from random import random
 import math
 
 n = 5
@@ -8,11 +10,13 @@ for i in range(n):
     u = Vec(math.cos(theta),math.sin(theta))
     pos = 5 * u
     vel = -10 * u 
-    particles.append(Particle(1,pos,vel,1))
+    p = Particle(1,pos,vel,1)
+    p.charge = 2*random()-1
+    particles.append(p)
 particles.pop()
 
 def forces(dt,particles):
     collision(dt, particles)
-    charge(dt, particles)
+    coulomb_force(dt, particles)
 
-simulation_loop(collision, 0.00005, particles, None)
+simulation_loop(collision, 0.00005, particles, color_from_charge)
