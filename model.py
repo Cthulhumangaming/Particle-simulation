@@ -58,7 +58,13 @@ def collision(dt, particles, k = 100000.0):
             if not p2 is p1: 
                 r = (p2.position - p1.position).norm()
                 if r < p2.radius + p1.radius:
-                    f += k*(p2.radius + p1.radius - r)*(1/r)*(p1.position - p2.position)
+                    f += k * (p2.radius + p1.radius - r)*(1/r)*(p1.position - p2.position)
+                    # Neutralizing charges
+                    p1_c = p1.charge
+                    p2_c = p2.charge
+                    new_charge = (p1_c+p2_c)/2
+                    p1.set_charge(new_charge)
+                    p2.set_charge(new_charge)
         p1.apply_force(dt, f)
 
 def coulomb_force(dt, particles, k = 1):
