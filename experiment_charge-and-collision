@@ -1,0 +1,18 @@
+from view import *
+import math
+
+n = 5
+particles = []
+for i in range(n):
+    theta = i*2*math.pi/n
+    u = Vec(math.cos(theta),math.sin(theta))
+    pos = 5 * u
+    vel = -10 * u 
+    particles.append(Particle(1,pos,vel,1))
+particles.pop()
+
+def forces(dt,particles):
+    collision(dt, particles)
+    charge(dt, particles)
+
+simulation_loop(collision, 0.00005, particles, None)
